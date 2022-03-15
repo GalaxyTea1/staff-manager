@@ -110,6 +110,7 @@ function Home({ setAuth }) {
       const res = await fetch("http://localhost:5000/employees");
       const data = await res.json();
       setItems(data.employee);
+      console.log(res);
     } catch (error) {}
   };
   useEffect(() => {
