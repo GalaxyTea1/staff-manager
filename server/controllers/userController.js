@@ -1,6 +1,7 @@
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
+import { StatusCodes } from "http-status-codes";
 
 const userController = {
   register: async (req, res) => {
@@ -8,7 +9,7 @@ const userController = {
       const { username, password, avatar } = req.body;
       const user = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
       if (user.rows.length !== 0) {
-        return res.status(401).send("User already exists");
+        return res.status(StatusCodes.UNAUTHORIZED).send("User already exists");
       }
       const saltRound = 10;
       const salt = await bcrypt.genSalt(saltRound);
@@ -25,7 +26,9 @@ const userController = {
       res.json({ token });
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ success: false, msg: "Internal server error" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
   login: async (req, res) => {
@@ -34,13 +37,13 @@ const userController = {
       const user = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
 
       if (user.rows.length === 0) {
-        return res.status(401).send("Username or Password invalid");
+        return res.status(StatusCodes.UNAUTHORIZED).send("Username or Password invalid");
       }
 
       const validPassword = await bcrypt.compare(password, user.rows[0].password);
 
       if (!validPassword) {
-        return res.status(401).json("Username or Password invalid");
+        return res.status(StatusCodes.UNAUTHORIZED).json("Username or Password invalid");
       }
 
       const token = jwtGenerator(user.rows[0].user_id);
@@ -48,7 +51,9 @@ const userController = {
       res.json({ token });
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ success: false, msg: "Internal server error" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
   isVerify: async (req, res) => {
@@ -56,7 +61,9 @@ const userController = {
       res.json(true);
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ success: false, msg: "Internal server error" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
 };

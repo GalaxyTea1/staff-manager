@@ -14,7 +14,9 @@ const employeeController = {
       });
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ success: false, msg: "Internal server error" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
   getEmployee: async (req, res) => {
@@ -24,6 +26,9 @@ const employeeController = {
       );
     } catch (error) {
       console.log(error.message);
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
   createEmployee: async (req, res) => {
@@ -34,14 +39,16 @@ const employeeController = {
         "INSERT INTO employee (firstname, lastname, email, department_id) VALUES($1, $2, $3, $4) RETURNING *",
         [firstname, lastname, email, department_id]
       );
-      res.status(200).json({
+      res.status(StatusCodes.OK).json({
         success: true,
         msg: "Created Success",
         employee: newEmployee.rows[0],
       });
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ success: false, msg: "Internal server error" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
   updateEmployee: async (req, res) => {
@@ -52,28 +59,32 @@ const employeeController = {
         "UPDATE employee SET firstname = $1, lastname = $2, email = $3, department_id = $4 WHERE employee_id = $5",
         [firstname, lastname, email, department_id, id]
       );
-      res.status(200).json({
+      res.status(StatusCodes.OK).json({
         success: true,
         msg: "Updated Success",
         employee: updateEmployee.rows,
       });
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ success: false, msg: "Internal server error" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
   deleteEmployee: async (req, res) => {
     try {
       const { id } = req.params;
       const deleteEmployee = await pool.query("DELETE FROM employee WHERE employee_id = $1", [id]);
-      res.status(200).json({
+      res.status(StatusCodes.OK).json({
         success: true,
         msg: "Deleted Success",
         employee: deleteEmployee.rows,
       });
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ success: false, msg: "Internal server error" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
 };

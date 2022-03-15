@@ -1,4 +1,5 @@
 const pool = require("../db");
+import { StatusCodes } from "http-status-codes";
 
 const dashboardController = {
   dashboard: async (req, res) => {
@@ -7,7 +8,9 @@ const dashboardController = {
       res.json(user.rows[0]);
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ success: false, msg: "Internal server error" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ success: false, msg: "Internal server error" });
     }
   },
 };

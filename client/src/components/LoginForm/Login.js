@@ -33,13 +33,14 @@ function Login({ setAuth }) {
       const parseRes = await res.json();
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
-        showToast("🦄 Logged in Successfully");
         setAuth(true);
+        showToast("🦄 Logged in Successfully");
         navigate("/home");
       } else {
         showToast(`🦄 Logged in Failed`);
       }
     } catch (error) {
+      localStorage.removeItem("token");
       console.log(error.message);
     }
   };

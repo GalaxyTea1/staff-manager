@@ -18,7 +18,6 @@ function App() {
         headers: { jwt_token: localStorage.token },
       });
       const parseRes = await res.json();
-
       parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
     } catch (err) {
       console.error(err.message);
@@ -30,6 +29,7 @@ function App() {
   }, []);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  console.log(isAuthenticated);
 
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
@@ -38,7 +38,10 @@ function App() {
   return (
     <div className='App'>
       <Routes history={history}>
-        <Route path='' element={<Login />} />
+        <Route
+          path=''
+          element={!isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate to='/home' />}
+        />
         <Route
           path='/login'
           element={!isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate to='/home' />}
