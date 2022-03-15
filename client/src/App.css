@@ -1,0 +1,157 @@
+:root {
+  --success-color: #2691d9;
+  --error-color: #e74c3c;
+}
+
+/* Common */
+.mt-8 {
+  margin-top: 8px !important;
+}
+
+.mt-16 {
+  margin-top: 16px !important;
+}
+
+.mt-32 {
+  margin-top: 32px !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+/* Login */
+
+.login-container {
+  background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  font-family: 'Poppins';  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-main {
+  width: 400px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  padding: 40px;
+}
+
+.login-main h1{
+  text-align: center;
+}
+
+.form-control {
+  width: 100%;
+  position: relative;
+  margin-top: 40px;
+  border: none;
+  outline: none;
+}
+
+.form-control input{
+  width: 99%;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #adadad;
+  margin: 10px 0;
+}
+
+.form-control span {
+  border-bottom: 3px solid var(--success-color);
+  position: absolute;
+  left: 3%;
+  top: 75%;
+  width: 0;
+  transition: 0.3s;
+}
+
+.form-control input:focus ~ span {
+  width: 93%;
+}
+
+.form-control.error small {
+  color: var(--error-color);
+}
+
+.form-control.error input {
+  border-bottom: 2px solid var(--error-color);
+}
+
+.btn-submit {
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  background: var(--success-color);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 25px 0;
+  transition: 0.3s;
+}
+
+.btn-submit:hover{
+  background: #08609a;
+  cursor: pointer;
+}
+
+.sign-up {
+  text-align: center;
+}
+
+.sign-up a{
+  text-decoration: none;
+}
+
+.sign-up:hover a{
+  cursor: pointer;
+  color: var(--success-color);
+  text-decoration: underline;
+}
+
+.forgot-pass {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.forgot-pass:hover {
+  cursor: pointer;
+  color: var(--success-color);
+}
+
+.check-error {
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--error-color)
+}
+
+/* Register */
+.register-container {
+  background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  font-family: 'Poppins';  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-main {
+  width: 400px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  padding: 40px;
+
+}
+
+.register-main h1{
+  text-align: center;
+
+}
+
