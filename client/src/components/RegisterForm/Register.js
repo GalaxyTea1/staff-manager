@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Register() {
+function Register({ setAuth }) {
   const [err, setErr] = useState();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,8 +21,9 @@ function Register() {
       console.log(res);
 
       if (res.status === 200) {
-        toast.success("Logged in Successfully");
-        navigate("/home");
+        toast.success("Register in Successfully");
+        setAuth(false);
+        navigate("/login");
       } else {
         alert("Error: " + res.statusText);
       }

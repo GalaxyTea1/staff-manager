@@ -39,17 +39,9 @@ function App() {
     <div className='App'>
       <Routes history={history}>
         <Route path='' element={<Login />} />
-        {/* <Route path='/login' element={<Login />} />
-        <Route path='/home' element={<Home />} /> */}
         <Route
           path='/login'
-          element={
-            !isAuthenticated ? (
-              <Login setAuth={setAuth} setIsAuthenticated={setIsAuthenticated} />
-            ) : (
-              <Navigate to='/home' />
-            )
-          }
+          element={!isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate to='/home' />}
         ></Route>
         <Route
           path='/register'

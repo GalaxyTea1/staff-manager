@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function Login({ setIsAuthenticated }) {
+function Login({ setAuth }) {
   const [err, setErr] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +34,7 @@ function Login({ setIsAuthenticated }) {
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
         showToast("🦄 Logged in Successfully");
-        setIsAuthenticated(true);
+        setAuth(true);
         navigate("/home");
       } else {
         showToast(`🦄 Logged in Failed`);
