@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const db = require("./configs/db");
 
 // const PORT = process.env.PORT || 5000;
 
@@ -12,11 +13,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //router
-app.use("/employees", require("./routers/employeeRouter"));
-app.use("/departments", require("./routers/departmentRouter"));
-app.use("/supervisor", require("./routers/supervisorRouter"));
-app.use("/user", require("./routers/userRouter"));
-app.use("/dashboard", require("./routers/dashboardRouter"));
+app.use("/employee", require("./routers/employeeRouter"));
+
+db.authenticate()
+  .then(() => console.log("Connected Database...."))
+  .catch((err) => console.log("Failed" + err));
 
 app.listen(5000, () => {
   console.log(`Server is running on port 5000`);

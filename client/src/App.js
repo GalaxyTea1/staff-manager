@@ -29,7 +29,6 @@ function App() {
   }, []);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  console.log(isAuthenticated);
 
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
