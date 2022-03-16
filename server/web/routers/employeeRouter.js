@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../configs/db");
-const employeeModel = require("../models/employeeModel");
+const db = require("../../configs/db");
+const employeeModel = require("../../models/employeeModel");
 
 router.get("/", (req, res) => res.send("Employee"));
 router.get("/", (req, res) => {
